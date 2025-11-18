@@ -14,7 +14,7 @@ This project demonstrates strong functional concepts including **pure functions*
 
 ## 📌 Project Structure
 
-```text
+
 LoanCalculator/
 │
 ├── Main.hs
@@ -31,7 +31,7 @@ Processing.hs	Pure financial formulas & amortization logic
 DataTypes.hs	Custom ADTs: LoanType, LoanConfig, Payment
 Utils.hs	Helper functions (rounding, parsing, etc.)
 
-🎯 Project Goal
+### 🎯 Project Goal
 Build a pure functional and auditable financial computation engine that:
 
 Calculates monthly loan payment
@@ -46,12 +46,11 @@ Avoids all mutation and side-effects (except in the IO module)
 
 This aligns with real-world fintech & banking needs where transparency and reliability are essential.
 
-🧮 Features
+### 🧮 Features
 ✔ Monthly Payment Calculation
 Uses the standard annuity formula:
 
-text
-Copy code
+
 MonthlyPayment = principal * r * (1 + r)^n / ((1 + r)^n - 1)
 
 where:
@@ -86,7 +85,7 @@ Deterministic
 
 Easily testable
 
-🛠️ How to Run
+### 🛠️ How to Run
 1. Navigate to the project folder
 bash
 Copy code
@@ -99,9 +98,8 @@ ghci Main.hs
 haskell
 Copy code
 main
-📥 Sample Input
-text
-Copy code
+### 📥 Sample Input
+
 ===== Functional Loan & Interest Calculator =====
 Enter principal amount (e.g. 1000000):
 1000000
@@ -111,9 +109,8 @@ Enter duration in years (e.g. 10):
 10
 Loan type: 1 = Annuity, 2 = Interest-only
 1
-📤 Sample Output
-text
-Copy code
+### 📤 Sample Output
+
 ===== Summary =====
 Principal          : 1000000.0
 Annual Rate (%)    : 12.0
@@ -128,29 +125,27 @@ Month 1 | Open: 1000000.0 | Interest: 10000.0 | Principal: 4321.51 | Close: 9956
 Month 2 | Open: 995678.49 | Interest: 9956.78 | Principal: 4364.73 | Close: 991313.76
 Month 3 | Open: 991313.76 | Interest: 9913.13 | Principal: 4408.38 | Close: 986905.38
 ...
-🧱 Functional Programming Concepts Used
-🟦 Pure Functions
+## 🧱 Functional Programming Concepts Used
+### 🟦 Pure Functions
 All financial formulas in Processing.hs contain no side effects and depend only on their inputs.
 
-🟩 Recursion
+### 🟩 Recursion
 The amortization schedule uses a recursive helper function, e.g.:
 
-haskell
-Copy code
+
 go :: Int -> Double -> [Payment]
 go k balance = ...
 🟨 Algebraic Data Types (ADTs)
 Example from DataTypes.hs:
 
-h
-Copy code
+
 data LoanType = Annuity | InterestOnly
 These ADTs model real-world concepts in a type-safe way.
 
-🟧 Immutability
+### 🟧 Immutability
 Each monthly Payment is a new immutable value, never modified after creation.
 
-🟪 Higher-Order Functions
+### 🟪 Higher-Order Functions
 Used for processing lists of payments, such as:
 
 map
@@ -161,7 +156,7 @@ take
 
 filter / zipWith (where needed)
 
-🟫 Modularity
+### 🟫 Modularity
 Each module handles one concern:
 
 Logic is clean
@@ -170,7 +165,7 @@ Code is testable
 
 Design is maintainable
 
-🧩 Possible Extensions
+## 🧩 Possible Extensions
 Add balloon payments
 
 Add variable interest rates (stepwise rate changes)
