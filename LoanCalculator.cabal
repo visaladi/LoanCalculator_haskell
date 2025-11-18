@@ -1,0 +1,33 @@
+cabal-version:      3.0
+name:               LoanCalculator
+version:            0.1.0.0
+license:            NONE
+build-type:         Simple
+extra-doc-files:    CHANGELOG.md
+
+common warnings
+    ghc-options: -Wall
+
+executable LoanCalculator
+    import:           warnings
+
+    -- Main entry module of the program
+    main-is:          Main.hs
+
+    -- All other modules used by the executable
+    other-modules:
+        IOHandler
+        Processing
+        DataTypes
+        Utils
+
+    -- Library dependencies
+    build-depends:
+        base ^>=4.18.3.0,
+        parallel,
+        deepseq
+
+    -- All source files are in the project root directory
+    hs-source-dirs:   .
+
+    default-language: Haskell2010

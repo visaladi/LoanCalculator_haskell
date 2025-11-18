@@ -22,4 +22,8 @@ readInt s =
 
 -- | Round a Double to 2 decimal places – useful for monetary values.
 round2 :: Double -> Double
-round2 x = fromIntegral (round (x * 100)) / 100
+round2 x =
+  let y :: Integer
+      y = round (x * 100)
+  in fromIntegral y / 100.0
+

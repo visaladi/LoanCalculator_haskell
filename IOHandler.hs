@@ -1,6 +1,3 @@
--- | IO layer for the Loan Calculator.
---   Handles all user interaction and console output,
---   while delegating all business logic to pure functions in 'Processing'.
 module IOHandler
   ( runLoanCalculator
   ) where
@@ -9,14 +6,10 @@ import DataTypes
 import Processing
 import Utils
 
--- | Main interactive flow:
---   1. Ask user for loan parameters.
---   2. Build a 'LoanConfig'.
---   3. Compute amortization schedule (in parallel-capable pure code).
---   4. Print summary and first few payment rows.
+-- | Main interactive flow.
 runLoanCalculator :: IO ()
 runLoanCalculator = do
-  putStrLn "===== Functional Loan & Interest Calculator ====="
+  putStrLn "===== Functional Loan & Interest Calculator (Parallel-enabled) ====="
 
   -- User inputs
   putStrLn "Enter principal amount (e.g. 1000000):"
@@ -31,7 +24,6 @@ runLoanCalculator = do
   putStrLn "Loan type: 1 = Annuity, 2 = Interest-only"
   tStr <- getLine
 
-  -- Build configuration (pure data)
   let p  :: Double
       p  = readDouble pStr
 
@@ -52,7 +44,7 @@ runLoanCalculator = do
               , loanType   = lt
               }
 
-      -- Use the parallel-capable pure schedule function.
+      -- Parallel-capable pure computations:
       schedule :: [Payment]
       schedule = amortizationScheduleParallel cfg
 
@@ -65,7 +57,6 @@ runLoanCalculator = do
       totalInt :: Double
       totalInt = totalInterestPaidParallel schedule
 
-  -- Output summary
   putStrLn "\n===== Summary ====="
   putStrLn $ "Principal          : " ++ show (round2 p)
   putStrLn $ "Annual Rate (%)    : " ++ show (round2 r)
@@ -77,7 +68,6 @@ runLoanCalculator = do
   putStrLn "\nShowing first 12 periods of amortization schedule:\n"
   mapM_ printPayment (take 12 schedule)
 
--- | Nicely format a single 'Payment' row for the console.
 printPayment :: Payment -> IO ()
 printPayment pay =
   putStrLn $
